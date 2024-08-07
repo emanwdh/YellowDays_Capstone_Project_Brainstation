@@ -65,9 +65,9 @@ Interests Page: Here a user can see their broader categories, with some quick in
 (Nice to Have) Atleast one Analytics Page: This where the user can see their stats related to their activities and interests.
 
 ## Mockups
+[YellowDays__Mobile__Mockup__V2.pdf](https://github.com/user-attachments/files/16517938/YellowDays__Mobile__Mockup__V2.pdf)
 
 [YellowDays__Desktop_Tablet__Mockup.pdf](https://github.com/user-attachments/files/16517657/YellowDays__Desktop_Tablet__Mockup.pdf)
-all activites:[YellowDays__Mobile__Mockup.pdf](https://github.com/user-attachments/files/16517656/YellowDays__Mobile__Mockup.pdf)
 
 ## Data
 I'll be building a SQL database to store all the data for the site. 
@@ -76,7 +76,7 @@ I'll have an Activity Table, which will have the user__id as a foreign key for e
 ## Endpoints
 ```
 GET 
-
+all activities:
 user/activities 
 
 single activity by id: 
