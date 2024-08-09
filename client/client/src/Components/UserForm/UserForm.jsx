@@ -1,9 +1,26 @@
-import './UserForm.scss';
+import "./UserForm.scss";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import '../../styles/partials/_variables.scss'
 
 export default function UserForm() {
+  const location = useLocation();
+  const { pathname } = location;
+  const [cta, setCTA] = useState("");
+
+  useMemo(() => {
+    if (pathname === "/signup") {
+      setCTA("Sign up");
+    } else if (pathname === "/login") {
+      setCTA("Login");
+    }
+  }, [pathname]);
+
+
+
   return (
     <div className="user-form">
-      <h3 className='user-form__title'>Login</h3>
+      <h3 className="user-form__title">{cta}</h3>
       <form className="user-form__form form">
         <div className="form__input-field user-form__input-field">
           <label className="input-field__label">username</label>
@@ -19,12 +36,24 @@ export default function UserForm() {
             placeholder="Enter your password"
           ></input>
         </div>
-        <button type="submit" className='user-form__button form__button'>Login</button>
+        <button type="submit" className="user-form__button form__button">
+          {cta}
+        </button>
       </form>
-      <div className="user-form__signup-option signup-option">
-        <p className="signup-option__hint signup-option__text">Don't have an account?</p>
-        <p className="signup-option__action signup-option__text">Sign up here</p>
-      </div>
+
+      {pathname === "/login" && (
+        <div className="user-form__signup-option signup-option">
+          <p className="signup-option__hint signup-option__text">
+            Don't have an account?
+          </p>
+          <Link
+            to="/signup"
+            className="signup-option__action signup-option__text"
+          >
+            <p>Sign up here</p>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

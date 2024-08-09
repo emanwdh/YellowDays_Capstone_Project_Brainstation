@@ -1,7 +1,11 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/placeholders" as *;
+@use "../../styles/partials/mixins.scss" as *;
 
 .user-form {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

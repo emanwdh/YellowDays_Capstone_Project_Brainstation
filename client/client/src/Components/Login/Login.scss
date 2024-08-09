@@ -1,3 +1,57 @@
-@use '../../styles/partials/variables' as *; 
-@use '../../styles/partials/placeholders' as *; 
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/placeholders" as *;
 
+@keyframes rock {
+  0% {
+    transform: rotate(180deg) translateZ(0);
+  }
+  100% {
+    transform: rotate(360deg) translateZ(0);
+  }
+}
+
+.section {
+  overflow: hidden;
+}
+
+.login {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 5rem;
+  & img {
+    animation: rock 2s linear alternate infinite;
+  
+  }
+}
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 0rem 1.6rem;
+  &__title {
+    @extend %logo-signup;
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  margin: 2rem;
+  &__title {
+    @extend %header-signup;
+    width: 40%;
+  }
+
+  &__text {
+    @extend %subheader-desc;
+    width: 50%;
+  }
+}
