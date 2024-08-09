@@ -27,9 +27,13 @@ svg {
   max-width: 100%;
 }
 
-input,
-button,
-textarea,
-select {
-  font: inherit;
+input::placeholder{
+  @extend %label;
+  //padding-left: 1rem;
+  font-size: 1rem;
+}
+
+input {
+  @extend %label;
+  padding-left: 2rem;
 }
