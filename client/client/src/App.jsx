@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.scss";
-import Login from "./Components/Login/Login";
+import Access from "./Components/Access/Access";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
@@ -8,8 +8,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path ="/login" element = {  <Login />} ></Route>
-        <Route path ="/signup" element = {  <Login />} ></Route>
+        <Route path ={"/"} element = {  <Access />} ></Route>
+        <Route path ={"/login"} element = {  <Access />} ></Route>
+        <Route path ="/signup" element = {  <Access />} ></Route>
       </Routes>
     </BrowserRouter>
   );

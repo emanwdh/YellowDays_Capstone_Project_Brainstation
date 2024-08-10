@@ -2,20 +2,36 @@
 @use "../../styles/partials/placeholders" as *;
 @use "../../styles/partials/mixins.scss" as *;
 
+.user-form__wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .user-form {
-  position: sticky;
+  position: fixed;
   bottom: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: $background-secondary;
-  height: 45vh;
+  height: 45%;
   gap: 1.2rem;
   padding: 5rem 2rem;
   border-radius: 5rem 5rem 0rem 0rem;
   //temp
   margin-top: 2rem;
+
+  @include tablet {
+    height: 35%;
+  }
+
+  @include desktop {
+    height: 100%;
+    position: initial;
+    width: 60%;
+    border-radius: 5rem;
+  }
 
   &__title {
     @extend %login-signup-cta;

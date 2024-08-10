@@ -1,10 +1,10 @@
 import UserForm from "../UserForm/UserForm";
-import "./Login.scss";
+import "./Access.scss";
 import YellowSmiley from "../../Assets/images/yellow-smiley.png";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-export default function Login() {
+export default function Access () {
   return (
     <>
       <section className="section">

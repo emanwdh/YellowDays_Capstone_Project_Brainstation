@@ -1,5 +1,6 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/placeholders" as *;
+@use "../../styles/partials/mixins" as *;
 
 @keyframes rock {
   0% {
@@ -12,6 +13,11 @@
 
 .section {
   overflow: hidden;
+  height: 100vh;
+  @include desktop {
+    height: 55vh;
+  }
+
 }
 
 .login {
@@ -21,6 +27,13 @@
   gap: 5rem;
   & img {
     animation: rock 2s linear alternate infinite;
+
+    @include desktop {
+      position: absolute;
+      height: 14rem;
+      right: 12rem;
+      top: -2rem;
+    }
   
   }
 }
@@ -44,14 +57,20 @@
   flex-direction: column;
   gap: 1.2rem;
   width: 100%;
+  height: 10vh;
   margin: 2rem;
+
+  @include tablet {
+    height: 2vh;
+  }
+
   &__title {
     @extend %header-signup;
-    width: 40%;
+    width: 80%;
   }
 
   &__text {
     @extend %subheader-desc;
-    width: 50%;
+    width: 80%;
   }
 }
