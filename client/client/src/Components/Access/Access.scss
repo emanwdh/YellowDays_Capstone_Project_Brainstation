@@ -14,10 +14,10 @@
 .section {
   overflow: hidden;
   height: 100vh;
-  @include desktop {
-    height: 55vh;
-  }
 
+  @include desktop {
+    height: 60vh;
+  }
 }
 
 .login {
@@ -34,7 +34,11 @@
       right: 12rem;
       top: -2rem;
     }
-  
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
   }
 }
 .header {
@@ -72,5 +76,38 @@
   &__text {
     @extend %subheader-desc;
     width: 80%;
+
+    @include desktop {
+      width:40%;
+    }
+  }
+
+  &__text::after {
+    @include desktop {
+      content: "";
+      border-bottom: 2px white solid;
+      padding-bottom: 6rem;
+      display: block;
+      width: 50%;
+    }
+  }
+
+  @include desktop {
+    height: 60%;
+  }
+
+}
+
+.info {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin: 1.6rem;
+  &__title {
+    @extend %login-signup-cta;
+  }
+  &__text {
+    @extend %paragraph-small;
   }
 }

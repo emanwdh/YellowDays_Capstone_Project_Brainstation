@@ -4,7 +4,13 @@ import YellowSmiley from "../../Assets/images/yellow-smiley.png";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-export default function Access () {
+export default function Access() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  window.addEventListener("resize", handleResize);
+
+  function handleResize() {
+    setWindowWidth(window.innerWidth);
+  }
   return (
     <>
       <section className="section">
@@ -24,7 +30,24 @@ export default function Access () {
           <img className="login__smiley" src={YellowSmiley}></img>
         </div>
       </section>
-      <UserForm />
+      <div className="login__info">
+        {windowWidth >= 1280 && (
+          <div className="info">
+            <h3 className="info__title">What’s this all about?</h3>
+            <p className="info__text">
+              YellowDays is a web app to help you catalogue, track and analyze
+              your outing habits.
+            </p>
+            <p className="info__text">
+              It’s meant to fuel your excitement, make the picking process
+              easier when planning an outing, and let you keep track and be more
+              intentional about what you get up to in your free time.
+            </p>
+          </div>
+        )}
+
+        <UserForm />
+      </div>
     </>
   );
 }
