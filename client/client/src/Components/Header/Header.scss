@@ -1,0 +1,38 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/placeholders" as *;
+
+
+.main-nav {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+
+    &__logo {
+        height: 8rem;
+        justify-self: flex-end;
+    }
+    &__list {
+        padding: 1.6rem 0rem;
+        display: flex;
+        justify-content: center;
+        gap: 1.6rem;
+        align-items: center;
+
+    }
+    
+    &__list-item {
+        @extend %nav-font;
+
+    }
+
+    &__list-item:hover {
+        transition: 1s;
+        font-weight: $bold;
+        border-bottom: 2px solid black;
+        padding-bottom: 2rem;
+    }
+}
+
