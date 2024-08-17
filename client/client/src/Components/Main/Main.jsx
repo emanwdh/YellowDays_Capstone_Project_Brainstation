@@ -29,7 +29,7 @@ export default function Main() {
             </div>
             <div className="activity__additional-group">
               <p className="activity__timestamp">Yesterday</p>
-              <h3 className="activity__interest-category">Music</h3>
+              <h3 className="activity__interest-category">Photography</h3>
               <CircleChevronRight size={30} fill="white" />
             </div>
           </div>
