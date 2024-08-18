@@ -8,6 +8,18 @@
   flex-direction: column;
   gap: 1rem;
   width: 50%;
+
+  &__sub {
+    @extend %nav-font;
+    font-weight: 400;
+    line-height: 2.4rem;
+  }
+
+  &__welcome {
+    @extend %nav-font;
+    font-weight: 400;
+    line-height: 2.4rem;
+  }
   &__title {
     @extend %main-header;
   }

@@ -4,14 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../styles/partials/_variables.scss";
 import axios from "axios";
 
-
 export default function UserForm() {
   const location = useLocation();
   const { pathname } = location;
   const [cta, setCTA] = useState("");
   const navigate = useNavigate();
 
-  const baseURL = 'http://localhost:5050/users/';
+  const baseURL = "http://localhost:5050/users/";
 
   useMemo(() => {
     if (pathname === "/signup") {
@@ -21,33 +20,34 @@ export default function UserForm() {
     }
   }, [pathname]);
 
-  async function handleSubmit (e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if(cta === "Sign up") {
+    if (cta === "Sign up") {
       try {
-        const result = await axios.post(`${baseURL}signup`, {username: e.target.username.value, password: e.target.password.value })
+        const result = await axios.post(`${baseURL}signup`, {
+          username: e.target.username.value,
+          password: e.target.password.value,
+        });
         console.log(result.data);
-      } catch(error) {
+      } catch (error) {
         console.error(error);
       }
-  
     }
-  
-    if(cta === "Login" || pathname === "/"){
+
+    if (cta === "Login" || pathname === "/") {
       try {
-        const result = await axios.post(`${baseURL}login`, {username: e.target.username.value, password: e.target.password.value })
-        const {username, token, id } = result.data;
-        console.log('login successful');
-        navigate(`/user/${id}/now`);
-      } catch(error) {
+        const result = await axios.post(`${baseURL}login`, {
+          username: e.target.username.value,
+          password: e.target.password.value,
+        });
+        const { username, token, id } = result.data;
+        console.log("login successful");
+        navigate(`user/${username}/${id}/home`);
+      } catch (error) {
         console.error(error);
       }
-  
     }
-
   }
-
- 
 
   return (
     <div className="user-form__wrapper">
@@ -59,7 +59,7 @@ export default function UserForm() {
             <input
               className="input-field__input"
               placeholder="Enter your username"
-              name = "username"
+              name="username"
             ></input>
           </div>
           <div className="form__input-field user-form__input-field">
@@ -67,7 +67,7 @@ export default function UserForm() {
             <input
               className="input-field__input"
               placeholder="Enter your password"
-              name = "password"
+              name="password"
             ></input>
           </div>
           <button type="submit" className="user-form__button form__button">

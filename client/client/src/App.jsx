@@ -12,7 +12,11 @@ function App() {
         <Route path ={"/"} element = {  <Access />} ></Route>
         <Route path ={"/login"} element = {  <Access />} ></Route>
         <Route path ="/signup" element = {  <Access />} ></Route>
-        <Route path = {"user/:id/now"} element = {<Main/>}></Route>
+        <Route path = {"user/:username/:id/now"} element = {<Main/>}></Route>
+        <Route path = {"user/:username/:id/next"} element = {<Main/>}></Route>
+        <Route path = {"user/:username/:id/later"} element = {<Main/>}></Route>
+        <Route path = {"user/:username/:id/home"} element = {<Main/>}></Route>
+        <Route path = {"user/:username/:id/add"} element = {<Main/>}></Route>
       </Routes>
     </BrowserRouter>
   );

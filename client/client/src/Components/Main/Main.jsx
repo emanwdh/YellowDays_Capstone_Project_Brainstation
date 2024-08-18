@@ -1,52 +1,81 @@
 import "./Main.scss";
 import Header from "../Header/Header";
-import { CircleChevronRight } from "lucide-react";
+import MainActivityList from "../MainActivityList/MainActivityList";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import AddActivity from "../AddActivity/AddActivity";
 
 export default function Main() {
+  const location = useLocation();
+  const { pathname } = location;
+  const { id, username } = useParams();
+
+  const [priority, setPriority] = useState({});
+
+  useEffect(() => {
+    if (pathname === `/user/${username}/${id}/now`) {
+      setPriority({
+        title: "Now",
+        subheader: "Sooner rather than later",
+        explainer:
+          "These are your current top tier picks for a good time" +
+          ". You want to do them, and you want to do them now.",
+      });
+    }
+
+    if (pathname === `/user/${username}/${id}/next`) {
+      setPriority({
+        title: "Next",
+        subheader: "Next up on the list",
+        explainer:
+          "These are your current next best activities to do, not the top picks, but they’re coming up!",
+      });
+    }
+
+    if (pathname === `/user/${username}/${id}/later`) {
+      setPriority({
+        title: "Later",
+        subheader: "Up and Coming on the list",
+        explainer:
+          "These might not be now, or next, but you still want to circle back to them later",
+      });
+    }
+
+    if (pathname === `/user/${username}/${id}/home`) {
+      setPriority({
+        title: "Home",
+        subheader: "Here you’ll find all the resources ",
+        explainer: "to make thrilling new plans with friends -curated by you",
+      });
+    }
+
+    if (pathname === `/user/${username}/${id}/add`) {
+      setPriority({
+        title: "Inbox",
+        subheader: "Here you can add new activities",
+        explainer: "You can always edit them later",
+      });
+    }
+  }, [pathname]);
+
   return (
     <>
-      <Header />
+      <Header username ={username} id = {id}/>
       <div className="main">
-        <h1 className="main__title">Now</h1>
-        <h3 className="main__subheader">Sooner rather than later</h3>
-        <p className="main__explainer">
-          These are your current top tier picks for a good time. You want to do
-          them, and you want to do them now.
-        </p>
+        {pathname === `/user/${username}/${id}/home` && (
+          <h3 className="main__welcome">Welcome, {username}!</h3>
+        )}
+        {pathname === `/user/${username}/${id}/add` && (
+          <h3 className="main__sub">Your</h3>
+        )}
+        <h1 className="main__title">{priority.title}</h1>
+        <h3 className="main__subheader">{priority.subheader}</h3>
+        <p className="main__explainer">{priority.explainer}</p>
       </div>
-      <div className="main-activities">
-        <div className="main-activities__filtering">
-          <p className="filter__title">Filter by </p>
-          <button className="filter__option button">Free</button>
-          <button className="filter__option button">Recently Added</button>
-        </div>
-        <div className="main-activities__group">
-          <div className="main-activities__activity activity">
-            <div className="activity__main-group">
-              <h2 className="activity__place-title">Little Italy</h2>
-              <h3 className="activity__place-type">Downtown Neighbourhood</h3>
-              <div className="activity__free-tag">Free</div>
-            </div>
-            <div className="activity__additional-group">
-              <p className="activity__timestamp">Yesterday</p>
-              <h3 className="activity__interest-category">Photography</h3>
-              <CircleChevronRight size={30} fill="white" />
-            </div>
-          </div>
-          <div className="main-activities__activity activity">
-            <div className="activity__main-group">
-              <h2 className="activity__place-title">Tapestry</h2>
-              <h3 className="activity__place-type">Live Music Bar</h3>
-              <div className="activity__free-tag">PWYC</div>
-            </div>
-            <div className="activity__additional-group">
-              <p className="activity__timestamp">Two days ago</p>
-              <h3 className="activity__interest-category">Music</h3>
-              <CircleChevronRight size={30} fill="white" />
-            </div>
-          </div>
-        </div>
-      </div>
+      {(pathname === `/user/${username}/${id}/now` ||
+        pathname === `/user/${username}/${id}/next` ||
+        pathname === `/user/${username}/${id}/later`) && <MainActivityList />}
+      {pathname === `/user/${username}/${id}/add` && <AddActivity />}
     </>
   );
 }
