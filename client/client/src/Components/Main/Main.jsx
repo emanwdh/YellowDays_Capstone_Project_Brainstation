@@ -10,6 +10,7 @@ export default function Main() {
   const location = useLocation();
   const { pathname } = location;
   const { id, username } = useParams();
+  const [activityId, setActivityId] = useState();
 
   const [priority, setPriority] = useState({});
 
@@ -83,9 +84,9 @@ export default function Main() {
       </div>
       {(pathname === `/user/${username}/${id}/now` ||
         pathname === `/user/${username}/${id}/next` ||
-        pathname === `/user/${username}/${id}/later`) && <MainActivityList  priority = {priority.title} username = {username}/>}
+        pathname === `/user/${username}/${id}/later`) && <MainActivityList  priority = {priority.title} username = {username} setActivityId ={setActivityId}/>}
       {pathname === `/user/${username}/${id}/add` && <AddActivity />}
-      {pathname === `/user/${username}/${id}/activity/:activity` && <ActivityDetails/>}
+      {pathname.includes( `/user/${username}/${id}/activity/${activityId}`) && <ActivityDetails/>}
     </>
   );
 }

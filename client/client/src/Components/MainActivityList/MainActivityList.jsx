@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 
-export default function MainActivityList({ priority, username }) {
+export default function MainActivityList({ priority, username, setActivityId }) {
   const [activityList, setActivityList] = useState([]);
   const { id } = useParams();
   const { pathname } = location;
@@ -98,7 +98,7 @@ export default function MainActivityList({ priority, username }) {
                 <h3 className="activity__interest-category">
                   {activity.interest}
                 </h3>
-                <CircleChevronRight size={30} fill="white" onClick={() => {navigate(`/user/${username}/${id}/activity/${activity.activity_id}`)}} />
+                <CircleChevronRight size={30} fill="white" onClick={() => {navigate(`/user/${username}/${id}/activity/${activity.activity_id}`); setActivityId(activity.activity_id)}} />
               </div>
             </div>
           ))}

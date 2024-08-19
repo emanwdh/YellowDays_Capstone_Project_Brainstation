@@ -1,2 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/placeholders" as *;
+
+
+.activity-details {
+    background-color: $background-secondary;
+}
