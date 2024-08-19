@@ -4,6 +4,7 @@ import MainActivityList from "../MainActivityList/MainActivityList";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState, useMemo, useEffect } from "react";
 import AddActivity from "../AddActivity/AddActivity";
+import ActivityDetails from "../ActivityDetails/ActivityDetails";
 
 export default function Main() {
   const location = useLocation();
@@ -56,6 +57,14 @@ export default function Main() {
         explainer: "You can always edit them later",
       });
     }
+
+    if (pathname.includes(`/user/${username}/${id}/activity/`)) {
+      setPriority({
+        title: "Activity Details",
+        subheader: "This is where to find details about a specific Activity",
+        explainer: "You can choose to edit, delete or update using the buttons provided",
+      });
+    }
   }, [pathname]);
 
   return (
@@ -74,8 +83,9 @@ export default function Main() {
       </div>
       {(pathname === `/user/${username}/${id}/now` ||
         pathname === `/user/${username}/${id}/next` ||
-        pathname === `/user/${username}/${id}/later`) && <MainActivityList  priority = {priority.title}/>}
+        pathname === `/user/${username}/${id}/later`) && <MainActivityList  priority = {priority.title} username = {username}/>}
       {pathname === `/user/${username}/${id}/add` && <AddActivity />}
+      {pathname === `/user/${username}/${id}/activity/:activity` && <ActivityDetails/>}
     </>
   );
 }
