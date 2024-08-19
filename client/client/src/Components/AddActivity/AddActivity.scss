@@ -1,9 +1,11 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/placeholders" as *;
+@use "../../styles/partials/mixins" as *;
+
 
 .main-background__dark {
   margin-top: 6rem;
-  height: 60vh;
+  height: 100vh;
   background-color: $background-secondary;
   display: flex;
   justify-content: center;
@@ -15,9 +17,13 @@
   position: absolute;
   top: -4rem;
   width: 80%;
-  height: 80%;
+  height: 60%;
   border-radius: 2rem;
   padding: 2rem;
+
+  @include tablet {
+    height: 100%;
+  }
 }
 
 .title__container {
@@ -73,6 +79,10 @@
     border: none;
     padding: 1rem 2rem;
 
+    @include tablet {
+        width: 20%;
+    }
+
     &__submit {
       background-color: white;
       color: $font-dark;
@@ -93,4 +103,21 @@
       color: white;
     }
   }
+}
+
+.form-radio {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.radio__selections {
+    display: flex;
+    gap: 1rem;
+}
+
+.radio__option {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
 }

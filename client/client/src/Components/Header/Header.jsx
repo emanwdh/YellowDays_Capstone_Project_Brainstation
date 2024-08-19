@@ -1,6 +1,7 @@
 import "./Header.scss";
 import Logo from "../../Assets/images/logo/logo.png";
 import { useNavigate } from "react-router-dom";
+import {Inbox} from  "lucide-react";
 
 export default function Header({username, id}) {
 
@@ -20,11 +21,12 @@ export default function Header({username, id}) {
         <li className="main-nav__list-item" onClick = {()=> {
           navigate(`/user/${username}/${id}/home`)
         }}>Home</li>
-        <li className="main-nav__list-item" onClick = {()=> {
+        <li className="main-nav__list-item list-item__home" onClick = {()=> {
           navigate(`/user/${username}/${id}/add`)
-        }}>Inbox</li>
+        }}><Inbox /><p>Inbox</p></li>
       </ul>
-      <img className = "main-nav__logo"src={Logo} />
+      <img className = "main-nav__logo" src={Logo} onClick = {()=> {
+          navigate(`/user/${username}/${id}/home`)}} />
     </div>
   );
 }
