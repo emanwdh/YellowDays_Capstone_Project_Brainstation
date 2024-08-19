@@ -8,6 +8,6 @@ import * as activityController from '../Controllers/actvitityController.js'
 router
   .route("/")
   .post(activityController.addActivity)
-  .get(activityController.getAllActivities);
+  .get(activityController.getActivitiesByUser);
 
 export default router;

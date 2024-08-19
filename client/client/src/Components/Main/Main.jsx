@@ -74,7 +74,7 @@ export default function Main() {
       </div>
       {(pathname === `/user/${username}/${id}/now` ||
         pathname === `/user/${username}/${id}/next` ||
-        pathname === `/user/${username}/${id}/later`) && <MainActivityList />}
+        pathname === `/user/${username}/${id}/later`) && <MainActivityList  priority = {priority.title}/>}
       {pathname === `/user/${username}/${id}/add` && <AddActivity />}
     </>
   );

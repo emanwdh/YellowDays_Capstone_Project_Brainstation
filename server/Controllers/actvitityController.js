@@ -3,7 +3,7 @@ import configuration from "../knexfile.js";
 const knex = initKnex(configuration);
 
 const addActivity = async (req, res) => {
-  if (!req.body.priority || !req.body.name || !req.body.type) {
+  if (!req.body.priority || !req.body.name || !req.body.type || !req.body.user_id) {
     return res
       .status(400)
       .send("Please ensure that all required fields are filled out.");
@@ -19,13 +19,13 @@ const addActivity = async (req, res) => {
   }
 };
 
-const getAllActivities = async (req, res) => {
+const getActivitiesByUser = async (req, res) => {
   try {
-    const data = await knex("Activities");
+    const data = await knex("Activities").where({user_id: req.query.user_id, priority: req.query.priority});
     res.status(200).json(data);
   } catch (err) {
     res.status(400).send(`Error retrieving Users: ${err}`);
   }
 };
 
-export { getAllActivities, addActivity };
+export { getActivitiesByUser, addActivity };
