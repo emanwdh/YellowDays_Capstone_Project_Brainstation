@@ -3,7 +3,12 @@ import configuration from "../knexfile.js";
 const knex = initKnex(configuration);
 
 const addActivity = async (req, res) => {
-  if (!req.body.priority || !req.body.name || !req.body.type || !req.body.user_id) {
+  if (
+    !req.body.priority ||
+    !req.body.name ||
+    !req.body.type ||
+    !req.body.user_id
+  ) {
     return res
       .status(400)
       .send("Please ensure that all required fields are filled out.");
@@ -21,11 +26,26 @@ const addActivity = async (req, res) => {
 
 const getActivitiesByUser = async (req, res) => {
   try {
-    const data = await knex("Activities").where({user_id: req.query.user_id, priority: req.query.priority});
+    const data = await knex("Activities").where({
+      user_id: req.query.user_id,
+      priority: req.query.priority,
+    });
     res.status(200).json(data);
   } catch (err) {
     res.status(400).send(`Error retrieving Users: ${err}`);
   }
 };
 
-export { getActivitiesByUser, addActivity };
+const getSingleActivity = async (req, res) => {
+  try {
+    const data = await knex("Activities").where({
+      user_id: req.query.user_id,
+      activity_id: req.query.activity_id,
+    });
+    res.status(200).json(data);
+  } catch (e) {
+    res.status(400).send(`Error retrieving Activity: ${e}`);
+  }
+};
+
+export { getActivitiesByUser, addActivity, getSingleActivity };

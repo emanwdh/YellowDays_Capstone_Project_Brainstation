@@ -13,9 +13,14 @@ export default function ActivityDetails({setActivityId}) {
   useEffect(() => {
     async function getActivity() {
       try {
-     //response = await axios.get(`http://localhost:5050/activities?user_id=${id}&activity_id=${}`);
-      } catch (e) {}
+      const response = await axios.get(`http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`);
+      console.log(response.data);
+      } catch (e) {
+        console.error(e);
+      }
     }
+
+    getActivity();
   }, []);
 
   return (
