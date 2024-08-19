@@ -9,7 +9,7 @@ import ActivityDetails from "../ActivityDetails/ActivityDetails";
 export default function Main() {
   const location = useLocation();
   const { pathname } = location;
-  const { id, username } = useParams();
+  const { id, username, activity } = useParams();
   const [activityId, setActivityId] = useState();
 
   const [priority, setPriority] = useState({});
@@ -63,14 +63,16 @@ export default function Main() {
       setPriority({
         title: "Activity Details",
         subheader: "This is where to find details about a specific Activity",
-        explainer: "You can choose to edit, delete or update using the buttons provided",
+        explainer:
+          "You can choose to edit, delete or update using the buttons provided",
       });
+      setActivityId(activity);
     }
   }, [pathname]);
 
   return (
     <>
-      <Header username ={username} id = {id}/>
+      <Header username={username} id={id} />
       <div className="main">
         {pathname === `/user/${username}/${id}/home` && (
           <h3 className="main__welcome">Welcome, {username}!</h3>
@@ -84,9 +86,17 @@ export default function Main() {
       </div>
       {(pathname === `/user/${username}/${id}/now` ||
         pathname === `/user/${username}/${id}/next` ||
-        pathname === `/user/${username}/${id}/later`) && <MainActivityList  priority = {priority.title} username = {username} setActivityId ={setActivityId}/>}
+        pathname === `/user/${username}/${id}/later`) && (
+        <MainActivityList
+          priority={priority.title}
+          username={username}
+          setActivityId={setActivityId}
+        />
+      )}
       {pathname === `/user/${username}/${id}/add` && <AddActivity />}
-      {pathname.includes( `/user/${username}/${id}/activity/${activityId}`) && <ActivityDetails/>}
+      {pathname === `/user/${username}/${id}/activity/${activityId}` && (
+        <ActivityDetails setActivityId={setActivityId} />
+      )}
     </>
   );
 }

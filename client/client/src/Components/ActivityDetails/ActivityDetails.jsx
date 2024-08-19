@@ -3,14 +3,17 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-export default function ActivityDetails() {
-console.log('hello world');
+export default function ActivityDetails({setActivityId}) {
+
+
+    const {id, activity} = useParams();
+   
  
 
   useEffect(() => {
     async function getActivity() {
       try {
-        //const response = await axios.get(`http://localhost:5050/activities?user_id=${id}&activity_id=`);
+     //response = await axios.get(`http://localhost:5050/activities?user_id=${id}&activity_id=${}`);
       } catch (e) {}
     }
   }, []);
