@@ -48,4 +48,21 @@ const getSingleActivity = async (req, res) => {
   }
 };
 
-export { getActivitiesByUser, addActivity, getSingleActivity };
+const deleteSingleActivity = async (req, res) => {
+  try {
+    await knex("Activities").where({
+      user_id: req.query.user_id,
+      activity_id: req.query.activity_id,
+    }).del();
+    res.status(204);
+  } catch (e) {
+    res.status(500).send(`Error deleting Activity: ${e}`);
+  }
+};
+
+export {
+  getActivitiesByUser,
+  addActivity,
+  getSingleActivity,
+  deleteSingleActivity,
+};

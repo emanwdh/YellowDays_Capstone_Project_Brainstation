@@ -1,7 +1,102 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/placeholders" as *;
 
-
 .activity-details {
-    background-color: $background-secondary;
+  background-color: $background-secondary;
+  height: 50vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 20rem;
+  gap: 2.4rem;
+
+  &__price {
+    text-transform: uppercase;
+    color: $highlight-yellow;
+    @extend %header-signup;
+  }
+
+  &__free {
+    font-size: 4rem;
+    font-weight: 400;
+    line-height: 4rem;
+  }
+
+  &__name {
+    @extend %nav-font;
+    font-size: 8rem;
+    line-height: 8rem;
+  }
+
+  &__group {
+    display: flex;
+    justify-content: space-between;
+    @extend %label;
+  }
+
+  &__created {
+    font-family: inter;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+  }
+
+  &__info {
+    display:flex;
+    gap: 2rem;
+    flex-direction: column;
+  }
+
+  &__interest {
+    @extend %nav-font;
+  }
+
+  &__url, &__url:visited{
+    @extend %label;
+    color: white;
+  }
+
+  &__type {
+    @extend %label;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 1.4rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+  }
+}
+
+.button {
+  width: 40%;
+  border-radius: 2rem;
+  height: 100%;
+  align-self: flex-end;
+  @extend %nav-font;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: $font-secondary-light;
+  border: none;
+  padding: 1rem 2rem;
+  &__edit {
+    background-color: white;
+    color: $font-dark;
+    border: 0.1rem solid black;
+  }
+
+  &__delete {
+    background-color: $button-dark;
+  }
+
+  &__edit:hover {
+    background-color: $font-dark;
+    color: white;
+  }
+
+  &__delete:hover {
+    background-color: $highlight-red;
+    color: white;
+  }
 }

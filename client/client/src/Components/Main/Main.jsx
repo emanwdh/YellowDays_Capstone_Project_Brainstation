@@ -14,6 +14,43 @@ export default function Main() {
 
   const [priority, setPriority] = useState({});
 
+  function relativeDate(date) {
+    const diff = Math.round((new Date() - new Date(date)) / 1000);
+    const minute = 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const week = day * 7;
+    const month = day * 30;
+    const year = month * 12;
+
+    if (diff < 30) {
+      return "just now";
+    } else if (diff < minute) {
+      return diff + " seconds ago";
+    } else if (diff < 2 * minute) {
+      return "a minute ago";
+    } else if (diff < hour) {
+      return Math.floor(diff / minute) + " minutes ago";
+    } else if (Math.floor(diff / hour) == 1) {
+      return "1 hour ago";
+    } else if (diff < day) {
+      return Math.floor(diff / hour) + " hours ago";
+    } else if (diff < day * 2) {
+      return "yesterday";
+    } else if (diff < week) {
+      return week + " days ago";
+    } else if (diff < month) {
+      return Math.floor(diff / week) + " weeks ago";
+    } else if (diff < year) {
+      return Math.floor(diff / month) + " months ago";
+    } else if (Math.floor(diff / year) == 1) {
+      return Math.floor(diff / year) + " year ago";
+    } else {
+      return Math.floor(diff / year) + " years ago";
+    }
+  }
+
+
   useEffect(() => {
     if (pathname === `/user/${username}/${id}/now`) {
       setPriority({
@@ -91,11 +128,12 @@ export default function Main() {
           priority={priority.title}
           username={username}
           setActivityId={setActivityId}
+          relativeDate={relativeDate}
         />
       )}
       {pathname === `/user/${username}/${id}/add` && <AddActivity />}
       {pathname === `/user/${username}/${id}/activity/${activityId}` && (
-        <ActivityDetails setActivityId={setActivityId} />
+        <ActivityDetails setActivityId={setActivityId}  relativeDate={relativeDate} />
       )}
     </>
   );
