@@ -63,15 +63,15 @@ const deleteSingleActivity = async (req, res) => {
 };
 
 const editSingleActivity = async (req, res) => {
-  const {free, interest, name, priority, resource, type, url} = req.body;
+  const { free, interest, name, priority, resource, type, url } = req.body;
   const activityUpdated = {
-    free, 
-    interest, 
-    name, 
-    priority, 
-    resource, 
+    free,
+    interest,
+    name,
+    priority,
+    resource,
     type,
-    url
+    url,
   };
   try {
     const updatedActivity = await knex("Activities")
@@ -80,7 +80,7 @@ const editSingleActivity = async (req, res) => {
         activity_id: req.query.activity_id,
       })
       .update(activityUpdated);
-      res.status(200).json(updatedActivity[0]);
+    res.status(200).json(updatedActivity[0]);
   } catch (e) {
     res.status(500).send(`Error updating activity: ${e}`);
   }
@@ -91,5 +91,5 @@ export {
   addActivity,
   getSingleActivity,
   deleteSingleActivity,
-  editSingleActivity
+  editSingleActivity,
 };

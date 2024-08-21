@@ -20,27 +20,28 @@ export default function MainActivityList({
     setIsToggled(!isToggled);
   };
 
-
   useMemo(async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5050/activities?user_id=${id}&priority=${priority}`
-      );
-      const dataArray = response.data;
-      console.log(response.data);
-      setActivityList(dataArray);
-    } catch (e) {
-      console.error(e);
+
+    if(isToggled === false){
+      try {
+        const response = await axios.get(
+          `http://localhost:5050/activities?user_id=${id}&priority=${priority}`
+        );
+        const dataArray = response.data;
+        setActivityList(dataArray);
+        console.log("non free");
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      setActivityList(activityList.filter((activity) => activity.free == 1))
     }
-  }, [priority]);
+  
+  }, [priority, isToggled]);
 
-  console.log(activityList);
-
-  if (activityList  === undefined || priority === undefined) {
+  if (activityList === undefined || priority === undefined) {
     return <>Loading...</>;
   }
-
- 
 
   return (
     <>

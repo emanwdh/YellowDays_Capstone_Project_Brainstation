@@ -16,4 +16,5 @@ router
 .delete(activityController.deleteSingleActivity)
 .put(activityController.editSingleActivity);
 
+
 export default router;
