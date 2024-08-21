@@ -75,12 +75,21 @@ I'll have a user table containing: primary key(user_id), the username and passwo
 I'll have an Activity Table, which will have the user__id as a foreign key for each activity. It will also contain, all the data needed for an activity. 
 ## Endpoints
 ```
+
+User Table
+Activity Table
+Tag Table
+UserActvitity Table (Join Table)
+UserTag Table (Join Table)
+
+
+
 GET 
 all activities:
-user/activities 
+/activities 
 
 single activity by id: 
-user/activities/:id
+activities/:id
 
 all tags:
 user/tags
@@ -89,10 +98,9 @@ recently added activities:
 user/activities/recent
 
 activities by priority: 
-user/activities/now
-user/activities/next
-user/activities/later
-*queries will be used since these categorizations are known*
+user/activities/priority=now
+user/activities/priority=next
+user/activities/priority=later
 
 activities(events) by time-sensitivity:
 user/events/happening-soon
