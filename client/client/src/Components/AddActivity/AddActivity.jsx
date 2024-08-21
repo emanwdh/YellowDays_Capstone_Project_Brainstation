@@ -21,6 +21,7 @@ export default function AddActivity() {
     name: "",
     user_id: id,
   });
+  const token = sessionStorage.getItem("JWTtoken");
 
 
   if(pathname.includes('edit')){
@@ -29,7 +30,11 @@ export default function AddActivity() {
       async function getActivity() {
         try {
           const response = await axios.get(
-            `http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`
+            `http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
           );
           setFormData(response.data[0]);
         } catch (e) {
@@ -67,7 +72,11 @@ export default function AddActivity() {
     if(pathname.includes('edit')){
 
       try {
-        const response = await axios.put( `http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`, formData);
+        const response = await axios.put( `http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log(response)
         navigate(-1)
       } catch (e) {
@@ -76,7 +85,11 @@ export default function AddActivity() {
 
     } else {
       try {
-        const response = await axios.post(`http://localhost:5050/activities`, formData);
+        const response = await axios.post(`http://localhost:5050/activities`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log(response)
         navigate(-1)
       } catch (e) {
