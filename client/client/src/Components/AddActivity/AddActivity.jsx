@@ -44,8 +44,6 @@ export default function AddActivity() {
 
  
 
-  console.log(formData);
-
 
   function handleInputChange(e) {
     const { name, value } = e.target;

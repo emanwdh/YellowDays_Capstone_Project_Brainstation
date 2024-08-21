@@ -28,7 +28,6 @@ export default function MainActivityList({
         );
         const dataArray = response.data;
         setActivityList(dataArray);
-        console.log("non free");
       } catch (e) {
         console.error(e);
       }
@@ -39,7 +38,6 @@ export default function MainActivityList({
         );
         const dataArray = response.data;
         setActivityList(dataArray);
-        console.log("non free");
       } catch (e) {
         console.error(e);
       }
