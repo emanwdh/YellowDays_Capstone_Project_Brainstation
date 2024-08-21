@@ -4,7 +4,7 @@ import YellowSmiley from "../../Assets/images/yellow-smiley.png";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-export default function Access() {
+export default function Access( {isLoggedIn, setIsLoggedIn}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   window.addEventListener("resize", handleResize);
 
@@ -46,7 +46,7 @@ export default function Access() {
           </div>
         )}
 
-        <UserForm />
+        <UserForm isLoggedIn ={isLoggedIn} setIsLoggedIn = {setIsLoggedIn} />
       </div>
     </>
   );

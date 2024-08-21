@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../styles/partials/_variables.scss";
 import axios from "axios";
 
-export default function UserForm() {
+export default function UserForm({isLoggedIn, setIsLoggedIn}) {
   const location = useLocation();
   const { pathname } = location;
   const [cta, setCTA] = useState("");
@@ -28,9 +28,9 @@ export default function UserForm() {
           username: e.target.username.value,
           password: e.target.password.value,
         });
-        console.log(result.data);
+        navigate("/login");
       } catch (error) {
-        console.error(error);
+        alert(error.response.data);
       }
     }
 
@@ -41,8 +41,8 @@ export default function UserForm() {
           password: e.target.password.value,
         });
         const { username, token, id } = result.data;
-        console.log("login successful");
-        navigate(`user/${username}/${id}/home`);
+        sessionStorage.setItem("JWTtoken", token);
+        navigate(`/user/${username}/${id}/home`);
       } catch (error) {
         console.error(error);
       }
@@ -68,6 +68,7 @@ export default function UserForm() {
               className="input-field__input"
               placeholder="Enter your password"
               name="password"
+              type = "password"
             ></input>
           </div>
           <button type="submit" className="user-form__button form__button">

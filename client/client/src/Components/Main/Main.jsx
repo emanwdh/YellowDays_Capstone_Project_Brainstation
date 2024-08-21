@@ -6,7 +6,7 @@ import { useState, useMemo, useEffect } from "react";
 import AddActivity from "../AddActivity/AddActivity";
 import ActivityDetails from "../ActivityDetails/ActivityDetails";
 
-export default function Main() {
+export default function Main({isLoggedIn}) {
   const location = useLocation();
   const { pathname } = location;
   const { id, username, activity } = useParams();

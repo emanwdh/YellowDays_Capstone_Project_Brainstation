@@ -16,21 +16,20 @@ const register = async function (req, res) {
   };
   const userExists = await knex("Users").where({ username: user.username });
 
-  if (userExists) {
-    res
-      .status(500)
-      .json({
-        message: "User already exists, please login using the login page",
+  if (userExists[0]) {
+    res.status(500).json({
+      message: "User already exists, please login using the login page",
+    });
+  } else {
+    try {
+      const result = await knex("Users").insert(user);
+      const createdUser = await knex("Users").where({
+        username: user.username,
       });
-  }
-
-  try {
-    const result = await knex("Users").insert(user);
-    const createdUser = await knex("Users").where({ username: user.username });
-    res.status(201).json(createdUser);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Unable to register user" });
+      res.status(201).json(createdUser);
+    } catch (error) {
+      res.status(500).json({ message: "Unable to register user" });
+    }
   }
 };
 

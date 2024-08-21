@@ -146,4 +146,7 @@
     font-weight:$bold;
    }
 }
+.sign-in__error {
+  @extend %nav-font;
+}
 
