@@ -2,7 +2,7 @@
 @use "../../styles/partials/placeholders" as *;
 
 .main-activities {
-    height: 60vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     background-color: $background-secondary;
