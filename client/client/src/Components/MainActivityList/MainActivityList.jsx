@@ -21,8 +21,18 @@ export default function MainActivityList({
   };
 
   useMemo(async () => {
-
-    if(isToggled === false){
+    if (pathname.includes("home")) {
+      try {
+        const response = await axios.get(
+          `http://localhost:5050/activities/all?user_id=${id}`
+        );
+        const dataArray = response.data;
+        setActivityList(dataArray);
+        console.log("non free");
+      } catch (e) {
+        console.error(e);
+      }
+    } else if (isToggled === false) {
       try {
         const response = await axios.get(
           `http://localhost:5050/activities?user_id=${id}&priority=${priority}`
@@ -33,10 +43,9 @@ export default function MainActivityList({
       } catch (e) {
         console.error(e);
       }
-    } else {
-      setActivityList(activityList.filter((activity) => activity.free == 1))
+    } else if (isToggled === true) {
+      setActivityList(activityList.filter((activity) => activity.free == 1));
     }
-  
   }, [priority, isToggled]);
 
   if (activityList === undefined || priority === undefined) {
@@ -46,16 +55,18 @@ export default function MainActivityList({
   return (
     <>
       <div className="main-activities">
-        <div className="main-activities__filtering">
-          <p className="filter__title">Filter by </p>
-          <button
-            className={`filter__option button ${isToggled ? "on" : `off`}`}
-            type="button"
-            onClick={handleChange}
-          >
-            Free
-          </button>
-        </div>
+        {!pathname.includes("home") && (
+          <div className="main-activities__filtering">
+            <p className="filter__title">Filter by </p>
+            <button
+              className={`filter__option button ${isToggled ? "on" : `off`}`}
+              type="button"
+              onClick={handleChange}
+            >
+              Free
+            </button>
+          </div>
+        )}
         <div className="main-activities__group">
           {activityList.map((activity) => (
             <div

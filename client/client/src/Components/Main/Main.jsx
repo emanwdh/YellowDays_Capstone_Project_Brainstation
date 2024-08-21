@@ -145,6 +145,13 @@ export default function Main() {
       {pathname === `/user/${username}/${id}/activity/${activityId}` && (
         <ActivityDetails setActivityId={setActivityId}  relativeDate={relativeDate}/>
       )}
+
+      {pathname === `/user/${username}/${id}/home` &&   <MainActivityList
+          priority={priority.title}
+          username={username}
+          setActivityId={setActivityId}
+          relativeDate={relativeDate}
+        />}
     </>
   );
 }

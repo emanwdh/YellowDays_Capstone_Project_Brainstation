@@ -86,10 +86,24 @@ const editSingleActivity = async (req, res) => {
   }
 };
 
+const getAllUserActivities = async (req, res) => {
+  try {
+    const data = await knex("Activities").where({
+      user_id: req.query.user_id,
+    });
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(400).send(`Error retrieving Users: ${err}`);
+  }
+};
+
+
+
 export {
   getActivitiesByUser,
   addActivity,
   getSingleActivity,
   deleteSingleActivity,
   editSingleActivity,
+  getAllUserActivities
 };
