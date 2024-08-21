@@ -1,0 +1,113 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/placeholders" as *;
+@use "../../styles/partials/mixins" as *;
+
+@keyframes rock {
+  0% {
+    transform: rotate(180deg) translateZ(0);
+  }
+  100% {
+    transform: rotate(360deg) translateZ(0);
+  }
+}
+
+.section {
+  overflow: hidden;
+  height: 100vh;
+
+  @include desktop {
+    height: 60vh;
+  }
+}
+
+.login {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 5rem;
+  & img {
+    animation: rock 2s linear alternate infinite;
+
+    @include desktop {
+      position: absolute;
+      height: 14rem;
+      right: 12rem;
+      top: -2rem;
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+  }
+}
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 0rem 1.6rem;
+  &__title {
+    @extend %logo-signup;
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  height: 10vh;
+  margin: 2rem;
+
+  @include tablet {
+    height: 2vh;
+  }
+
+  &__title {
+    @extend %header-signup;
+    width: 80%;
+  }
+
+  &__text {
+    @extend %subheader-desc;
+    width: 80%;
+
+    @include desktop {
+      width:40%;
+    }
+  }
+
+  &__text::after {
+    @include desktop {
+      content: "";
+      border-bottom: 2px white solid;
+      padding-bottom: 6rem;
+      display: block;
+      width: 50%;
+    }
+  }
+
+  @include desktop {
+    height: 60%;
+  }
+
+}
+
+.info {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin: 1.6rem;
+  &__title {
+    @extend %login-signup-cta;
+  }
+  &__text {
+    @extend %paragraph-small;
+  }
+}

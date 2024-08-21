@@ -1,0 +1,111 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/placeholders" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.user-form__wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.user-form {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $background-secondary;
+  height: 45%;
+  gap: 1.2rem;
+  padding: 5rem 2rem;
+  border-radius: 5rem 5rem 0rem 0rem;
+  //temp
+  margin-top: 2rem;
+
+  @include tablet {
+    height: 35%;
+  }
+
+  @include desktop {
+    height: 100%;
+    position: initial;
+    width: 60%;
+    border-radius: 5rem;
+  }
+
+  &__title {
+    @extend %login-signup-cta;
+    color: $font-light;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 40%;
+  }
+
+  &__input-field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  &__signup-option {
+    display: flex;
+    gap: 1.6rem;
+  }
+
+  &__button {
+    width: 60%;
+    border-radius: 2rem;
+    height: 3rem;
+    align-self: flex-end;
+    @extend %label;
+    text-transform: uppercase;
+    font-weight: $bold;
+    background-color: $button-dark;
+    color: $font-secondary-light;
+    border: none;
+  }
+
+  &__button:hover {
+    background-color: $button-hover;
+    border: 0.1rem solid $background-main;
+  }
+}
+
+.signup-option {
+  display: flex;
+  justify-content: space-between;
+
+  &__hint {
+    font-weight: $bold;
+    font-style: italic;
+  }
+  &__text {
+    @extend %paragraph-subscript;
+    color: $font-light;
+    width: 40%;
+  }
+  & p {
+    text-align: center;
+  }
+}
+
+.input-field {
+  &__label {
+    @extend %label;
+    color: $font-light;
+    margin-left: 1rem;
+  }
+
+  &__input,
+  input::placeholder {
+    border-radius: 2rem;
+    border: none;
+    height: 2.5rem;
+  }
+}

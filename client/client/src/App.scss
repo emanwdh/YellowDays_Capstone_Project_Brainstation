@@ -1,0 +1,56 @@
+@use "./styles/partials/variables" as *;
+@use "./styles/partials/placeholders" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  font-size: 10px;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: $background-main;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input::placeholder {
+  @extend %label;
+  font-size: 1rem;
+}
+
+input {
+  @extend %label;
+  padding-left: 2rem;
+}
+
+.section {
+  padding: 1.6rem 0rem;
+  width: 100%;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+select {
+  overflow-y: auto;
+  height: 3rem;
+  border-radius: 2rem;
+  padding: 0rem 1rem;
+  font-family: inter;
+}
