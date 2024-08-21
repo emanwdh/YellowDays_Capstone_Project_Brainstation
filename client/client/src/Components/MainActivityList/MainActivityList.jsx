@@ -1,46 +1,58 @@
 import "./MainActivityList.scss";
 import { CircleChevronRight } from "lucide-react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, act } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 
-export default function MainActivityList({ priority, username, setActivityId, relativeDate }) {
-  const [activityList, setActivityList] = useState([]);
+export default function MainActivityList({
+  priority,
+  username,
+  setActivityId,
+  relativeDate,
+}) {
+  const [activityList, setActivityList] = useState();
+  const [isToggled, setIsToggled] = useState(false);
   const { id } = useParams();
   const { pathname } = location;
   const navigate = useNavigate();
 
-  
-  async function getActivities() {
+  const handleChange = () => {
+    setIsToggled(!isToggled);
+  };
+
+
+  useMemo(async () => {
     try {
       const response = await axios.get(
         `http://localhost:5050/activities?user_id=${id}&priority=${priority}`
       );
       const dataArray = response.data;
+      console.log(response.data);
       setActivityList(dataArray);
     } catch (e) {
       console.error(e);
     }
-  }
+  }, [priority]);
 
-  useEffect(() => {
-    getActivities();
-  });
+  console.log(activityList);
 
-  if (activityList == undefined) {
+  if (activityList  === undefined || priority === undefined) {
     return <>Loading...</>;
   }
 
+ 
+
   return (
     <>
-      <div className= "main-activities">
+      <div className="main-activities">
         <div className="main-activities__filtering">
           <p className="filter__title">Filter by </p>
-          <button className="filter__option button" type="button">
+          <button
+            className={`filter__option button ${isToggled ? "on" : `off`}`}
+            type="button"
+            onClick={handleChange}
+          >
             Free
-          </button>
-          <button className="filter__option button" type="button">
-            Recently Added
           </button>
         </div>
         <div className="main-activities__group">
@@ -63,7 +75,17 @@ export default function MainActivityList({ priority, username, setActivityId, re
                 <h3 className="activity__interest-category">
                   {activity.interest}
                 </h3>
-                <CircleChevronRight className="activity__details-button" size={30} fill="white" onClick={() => {navigate(`/user/${username}/${id}/activity/${activity.activity_id}`); setActivityId(activity.activity_id)}} />
+                <CircleChevronRight
+                  className="activity__details-button"
+                  size={30}
+                  fill="white"
+                  onClick={() => {
+                    navigate(
+                      `/user/${username}/${id}/activity/${activity.activity_id}`
+                    );
+                    setActivityId(activity.activity_id);
+                  }}
+                />
               </div>
             </div>
           ))}
