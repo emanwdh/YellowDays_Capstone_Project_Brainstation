@@ -12,7 +12,7 @@ export default function AddActivity() {
   const navigate = useNavigate();
   const { id, activity } = useParams();
   const [formData, setFormData] = useState({
-    free: 0,
+    free: "",
     priority: "",
     type: "",
     interest: "",
@@ -69,6 +69,10 @@ export default function AddActivity() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if(formData.free === "" || formData.type == ""){
+      alert("Please fill in the price and type categories.");
+    }
+
     if(pathname.includes('edit')){
 
       try {
@@ -111,7 +115,7 @@ export default function AddActivity() {
               {" "}
               <div className="form-radio">
                 <label>Is it Free?</label>
-                <div className="radio__selections">
+                <div className="radio__selections" required>
                   <div className="radio__option">
                     <input
                       onChange={handleInputChange}
@@ -136,7 +140,7 @@ export default function AddActivity() {
               </div>
               <div className="form-radio">
                 <label>Select a Type</label>
-                <div className="radio__selections">
+                <div className="radio__selections" required>
                   <div className="radio__option">
                     <input
                       onChange={handleInputChange}
@@ -160,7 +164,7 @@ export default function AddActivity() {
                 </div>
               </div>
               <label>Place Title</label>
-              <input placeholder="Add the Event or Place Title" onChange={handleInputChange} name = "name" value = {formData.name}></input>
+              <input placeholder="Add the Event or Place Title" onChange={handleInputChange} name = "name" value = {formData.name} required></input>
             </div>
             <div className="form__section">
               <label>Priority Level</label>
@@ -168,6 +172,7 @@ export default function AddActivity() {
                 onChange={handleInputChange}
                 name="priority"
                 value={formData.priority}
+                required
               >
                 <option>Please Select</option>
                 <option>Now</option>
@@ -178,7 +183,7 @@ export default function AddActivity() {
               <select
                 onChange={handleInputChange}
                 name="interest"
-                value={formData.interest}
+                value={formData.interest} required
               >
                 <option>Please Select</option>
                 <option>Music</option>
