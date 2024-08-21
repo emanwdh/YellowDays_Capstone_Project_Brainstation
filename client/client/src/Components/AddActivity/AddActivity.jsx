@@ -170,6 +170,10 @@ export default function AddActivity() {
                 <option>Please Select</option>
                 <option>Music</option>
                 <option>Photography</option>
+                <option>Food</option>
+                <option>Art</option>
+                <option>Learning</option>
+                <option>Exercise</option>
               </select>
               <label>Resource Name</label>
               <input
