@@ -99,11 +99,20 @@ export default function Main() {
     if (pathname.includes(`/user/${username}/${id}/activity/`)) {
       setPriority({
         title: "Activity Details",
-        subheader: "This is where to find details about a specific Activity",
+        subheader: "This is where to find details about a specific activity",
         explainer:
-          "You can choose to edit, delete or update using the buttons provided",
+          "You can choose to edit or delete using the buttons provided",
       });
       setActivityId(activity);
+    }
+
+    if(pathname === `/user/${username}/${id}/activity/${activity}/edit` ) {
+      setPriority({
+        title: "Edit Activity",
+        subheader: "This is where to edit an existing activity",
+        explainer:
+          "Select the areas you would like to edit and click submit to change them",
+      });
     }
   }, [pathname]);
 
@@ -132,8 +141,9 @@ export default function Main() {
         />
       )}
       {pathname === `/user/${username}/${id}/add` && <AddActivity />}
+      {pathname === `/user/${username}/${id}/activity/${activity}/edit` && <AddActivity/>}
       {pathname === `/user/${username}/${id}/activity/${activityId}` && (
-        <ActivityDetails setActivityId={setActivityId}  relativeDate={relativeDate} />
+        <ActivityDetails setActivityId={setActivityId}  relativeDate={relativeDate}/>
       )}
     </>
   );

@@ -18,6 +18,7 @@ function App() {
         <Route path = {"user/:username/:id/home"} element = {<Main/>}></Route>
         <Route path = {"user/:username/:id/add"} element = {<Main/>}></Route>
         <Route path = {"user/:username/:id/activity/:activity"} element = {<Main/>}></Route>
+        <Route path = {"user/:username/:id/activity/:activity/edit"} element = {<Main/>}></Route>
       </Routes>
     </BrowserRouter>
   );

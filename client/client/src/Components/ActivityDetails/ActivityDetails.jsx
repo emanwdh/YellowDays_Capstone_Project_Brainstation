@@ -6,9 +6,10 @@ import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 export default function ActivityDetails({ setActivityId, relativeDate }) {
   const location = useLocation();
   const { pathname } = location;
-  const { id, activity } = useParams();
   const [singleActivity, setSingleActivity] = useState([]);
   const navigate = useNavigate();
+  const {id, username, activity} = useParams();
+  
 
   useEffect(() => {
     async function getActivity() {
@@ -65,7 +66,7 @@ export default function ActivityDetails({ setActivityId, relativeDate }) {
           {singleActivity.url}
         </Link>
         <div className="activity-details__buttons">
-          <button className="activity-details__button button__edit button">
+          <button className="activity-details__button button__edit button" onClick ={()=> {navigate(`/user/${username}/${id}/activity/${activity}/edit`)}}>
             Edit
           </button>
           <button

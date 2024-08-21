@@ -107,6 +107,10 @@
       @extend %nav-font;
       font-weight:$bold;
      }
+
+     &__details-button:hover {
+      fill: $highlight-yellow;
+     }
   }
   
   

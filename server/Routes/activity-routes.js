@@ -13,6 +13,7 @@ router
 router 
 .route("/activity")
 .get(activityController.getSingleActivity)
-.delete(activityController.deleteSingleActivity);
+.delete(activityController.deleteSingleActivity)
+.put(activityController.editSingleActivity);
 
 export default router;

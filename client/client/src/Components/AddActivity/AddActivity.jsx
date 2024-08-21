@@ -1,14 +1,18 @@
 import "./AddActivity.scss";
-import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams, useLocation} from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import e from "cors";
 
 export default function AddActivity() {
+
+
+  const location = useLocation();
+  const {pathname} = location;
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, activity } = useParams();
   const [formData, setFormData] = useState({
-    free: false,
+    free: 0,
     priority: "",
     type: "",
     interest: "",
@@ -19,26 +23,68 @@ export default function AddActivity() {
   });
 
 
+  if(pathname.includes('edit')){
+
+    useEffect(() => {
+      async function getActivity() {
+        try {
+          const response = await axios.get(
+            `http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`
+          );
+          setFormData(response.data[0]);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+  
+      getActivity();
+    }, []);
+
+  }
+
+ 
+
+  console.log(formData);
+
+
   function handleInputChange(e) {
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
+
+    if(name === "free") {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: Number(value),
+      }));
+  
+    }
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if(pathname.includes('edit')){
 
-    try {
-      const response = await axios.post(`http://localhost:5050/activities`, formData);
-      console.log(response)
-      navigate(-1)
-    } catch (e) {
-        console.error(e);
+      try {
+        const response = await axios.put( `http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`, formData);
+        console.log(response)
+        navigate(-1)
+      } catch (e) {
+          console.error(e.response.data);
+      }
+
+    } else {
+      try {
+        const response = await axios.post(`http://localhost:5050/activities`, formData);
+        console.log(response)
+        navigate(-1)
+      } catch (e) {
+          console.error(e);
+      }
     }
-    console.log(formData);
   }
 
  
@@ -48,7 +94,7 @@ export default function AddActivity() {
         <div className="inbox">
           <form className="form inbox__form" onSubmit={handleSubmit}>
             <div className="title__container">
-              <h2 className="form__title"> Add a new activity </h2>
+              <h2 className="form__title"> {pathname.includes('edit')? 'Edit an activity': 'Add a new activity'}</h2>
             </div>
             <div className="form__section">
               {" "}
@@ -60,7 +106,8 @@ export default function AddActivity() {
                       onChange={handleInputChange}
                       type="radio"
                       name="free"
-                      value={1}
+                      value= {1}
+                      defaultChecked={pathname.includes('edit') && formData.price == 1}
                     ></input>
                     <label>Yes</label>
                   </div>
@@ -69,7 +116,8 @@ export default function AddActivity() {
                       onChange={handleInputChange}
                       type="radio"
                       name="free"
-                      value={0}
+                      value= {0}
+                      defaultChecked={pathname.includes('edit') && formData.price == 0}
                     ></input>
                     <label>No</label>
                   </div>
@@ -84,6 +132,7 @@ export default function AddActivity() {
                       type="radio"
                       name="type"
                       value="event"
+                      checked={formData.type === "event"}
                     ></input>
                     <label>Event</label>
                   </div>
@@ -93,6 +142,7 @@ export default function AddActivity() {
                       type="radio"
                       name="type"
                       value="place"
+                      checked={formData.type === "place"}
                     ></input>
                     <label>Place</label>
                   </div>
@@ -149,8 +199,7 @@ export default function AddActivity() {
               >
                 Cancel
               </button>
-              <button className="button__submit button" type="submit">
-                add now
+              <button className="button__submit button" type="submit">{pathname.includes('edit')? "Submit" : "add now"}
               </button>
             </div>
           </form>

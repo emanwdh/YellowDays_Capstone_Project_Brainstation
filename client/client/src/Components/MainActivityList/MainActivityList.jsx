@@ -63,7 +63,7 @@ export default function MainActivityList({ priority, username, setActivityId, re
                 <h3 className="activity__interest-category">
                   {activity.interest}
                 </h3>
-                <CircleChevronRight size={30} fill="white" onClick={() => {navigate(`/user/${username}/${id}/activity/${activity.activity_id}`); setActivityId(activity.activity_id)}} />
+                <CircleChevronRight className="activity__details-button" size={30} fill="white" onClick={() => {navigate(`/user/${username}/${id}/activity/${activity.activity_id}`); setActivityId(activity.activity_id)}} />
               </div>
             </div>
           ))}
