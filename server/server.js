@@ -8,8 +8,8 @@ import jwt from "jsonwebtoken";
 
 const app = express();
 
-//use env file later
 const PORT = 5050;
+const SECRET_KEY = process.env.SECRET_KEY;
 
 //middleware
 app.use(cors());
@@ -29,9 +29,11 @@ function authorize(req, res, next) {
       next();
     } catch (error) {
       res.sendStatus(401);
+
     }
   }
 
-app.use("/activities", activityRoutes);
-app.use("/tags", tagRoutes);
+
+app.use("/activities", authorize, activityRoutes);
+app.use("/tags", authorize,  tagRoutes);
 app.use("/users", userRoutes);

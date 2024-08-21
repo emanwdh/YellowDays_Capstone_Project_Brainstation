@@ -11,6 +11,7 @@ export default function Main({isLoggedIn}) {
   const { pathname } = location;
   const { id, username, activity } = useParams();
   const [activityId, setActivityId] = useState();
+  const token = sessionStorage.getItem("JWTtoken");
 
   const [priority, setPriority] = useState({});
 

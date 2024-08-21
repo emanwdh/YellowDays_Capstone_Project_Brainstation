@@ -15,6 +15,7 @@ export default function MainActivityList({
   const { id } = useParams();
   const { pathname } = location;
   const navigate = useNavigate();
+  const token = sessionStorage.getItem("JWTtoken");
 
   const handleChange = () => {
     setIsToggled(!isToggled);
@@ -24,22 +25,32 @@ export default function MainActivityList({
     if (pathname.includes("home")) {
       try {
         const response = await axios.get(
-          `http://localhost:5050/activities/all?user_id=${id}`
+          `http://localhost:5050/activities/all?user_id=${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         const dataArray = response.data;
         setActivityList(dataArray);
       } catch (e) {
-        console.error(e);
+        alert(e.response.data);
+        navigate("/");
       }
     } else if (isToggled === false) {
       try {
         const response = await axios.get(
-          `http://localhost:5050/activities?user_id=${id}&priority=${priority}`
+          `http://localhost:5050/activities?user_id=${id}&priority=${priority}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         const dataArray = response.data;
         setActivityList(dataArray);
       } catch (e) {
-        console.error(e);
+        alert(e.response.data);
+        navigate("/");
       }
     } else if (isToggled === true) {
       setActivityList(activityList.filter((activity) => activity.free == 1));
