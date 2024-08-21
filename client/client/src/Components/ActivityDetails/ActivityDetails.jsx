@@ -9,13 +9,18 @@ export default function ActivityDetails({ setActivityId, relativeDate }) {
   const [singleActivity, setSingleActivity] = useState([]);
   const navigate = useNavigate();
   const {id, username, activity} = useParams();
+  const token = sessionStorage.getItem("JWTtoken");
   
 
   useEffect(() => {
     async function getActivity() {
       try {
         const response = await axios.get(
-          `http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`
+          `http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setSingleActivity(response.data[0]);
       } catch (e) {
@@ -30,7 +35,11 @@ export default function ActivityDetails({ setActivityId, relativeDate }) {
     async function deleteActivity() {
       try {
         await axios.delete(
-          `http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`
+          `http://localhost:5050/activities/activity?user_id=${id}&activity_id=${activity}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
       } catch (e) {
         console.log(e);
